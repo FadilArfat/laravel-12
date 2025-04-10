@@ -33,15 +33,15 @@ class ProductController extends Controller
         ]);
 
         $image = $request->file('image');
-        $image->storeAs('products', $image->hashName());
+$image->move(public_path('products'), $image->hashName());
 
-        Product::create([
-            'image' => $image->hashName(),
-            'title' => $request->title,
-            'description'    => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock
-        ]);
+Product::create([
+    'image' => $image->hashName(),
+    'title' => $request->title,
+    'description'    => $request->description,
+    'price' => $request->price,
+    'stock' => $request->stock
+]);
 
         return redirect()->route('products.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
